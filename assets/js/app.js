@@ -7,7 +7,6 @@ function crearGaleria(imagenes, contenedorId) {
     let touchStartX = 0;
     let touchEndX = 0;
 
-    // Hover control
     let hoverTimer;
     contenedor.addEventListener('mouseenter', () => {
         hoverTimer = setInterval(() => {
@@ -22,7 +21,6 @@ function crearGaleria(imagenes, contenedorId) {
         img.src = imagenes[0];
     });
 
-    // Touch controls
     contenedor.addEventListener('touchstart', (e) => {
         touchStartX = e.changedTouches[0].screenX;
     });
@@ -50,6 +48,13 @@ function crearGaleria(imagenes, contenedorId) {
 }function renderPropiedades(propiedades, contenedorId) {
         const contenedor = document.getElementById(contenedorId);
         contenedor.innerHTML = '';
+ function formatToCLP(value) {
+            return value.toLocaleString("es-CL", {
+              style: "currency", // Formato de moneda
+              currency: "CLP",   // Moneda chilena
+              minimumFractionDigits: 0, // Sin decimales
+            });
+          }
         
         propiedades.forEach((propiedad, index) => {
             const estadoFumar = propiedad.smoke ? 
@@ -75,7 +80,7 @@ function crearGaleria(imagenes, contenedorId) {
                             <p class="card-text">${propiedad.descripcion}</p>
                             <p><i class="fas fa-map-marker-alt"></i> ${propiedad.ubicacion}</p>
                             <p><i class="fas fa-bed"></i> ${propiedad.habitaciones} Habitaciones | <i class="fas fa-bath"></i> ${propiedad.banos} Baños</p>
-                            <p><i class="fas fa-dollar-sign"></i> ${propiedad.costo}</p>
+                             <p><i class="fas fa-dollar-sign"></i> ${formatToCLP(propiedad.costo)}</p>
                             ${estadoFumar}
                             ${estadoMascotas}
                         </div>
